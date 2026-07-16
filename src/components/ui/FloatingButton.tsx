@@ -14,7 +14,7 @@ export default function FloatingButton({ icon, label, onClick }: Props) {
     <button
       type="button"
       onClick={onClick}
-      className="animate-fab-in fixed bottom-[88px] right-5 z-40 flex items-center rounded-full bg-orange-600 px-5 py-3.5 shadow-float transition-opacity active:opacity-80 lg:bottom-6"
+      className="animate-fab-in fixed bottom-[88px] right-5 z-40 flex items-center rounded-full bg-orange-600 px-5 py-3.5 shadow-float transition-opacity active:opacity-80 lg:bottom-[112px]"
     >
       {icon}
       <span className={`text-body1-sb text-white ${icon ? 'ml-1.5' : ''}`}>

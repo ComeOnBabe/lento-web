@@ -16,17 +16,13 @@ export default function CalendarPage() {
   const title = `${month.getFullYear()}년 ${month.getMonth() + 1}월`;
 
   return (
-    <div className="min-h-screen bg-gray-200">
+    <div className="min-h-full bg-gray-200">
       <PageHeader title={title} />
 
-      <div className="flex flex-col gap-5 px-5 pt-6">
+      <div className="pb-tabbar flex flex-col gap-5 px-5 pt-6">
         <ConnectSpouseCard />
-
-        {/* 데스크톱에서는 캘린더와 일정 목록을 나란히 둔다 */}
-        <div className="grid grid-cols-1 gap-5 lg:grid-cols-[1.4fr_1fr] lg:items-start">
-          <UserCalendar month={month} onMonthChange={setMonth} />
-          <UpcomingSchedule />
-        </div>
+        <UserCalendar month={month} onMonthChange={setMonth} />
+        <UpcomingSchedule />
       </div>
 
       <FloatingButton icon={<PlusIcon />} label="일정 등록하기" />

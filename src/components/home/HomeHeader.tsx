@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 
 import MenuDrawer from '@/components/shell/MenuDrawer';
 import NotificationPanel from '@/components/shell/NotificationPanel';
+import { useScrollArea } from '@/components/shell/ScrollAreaContext';
 
 const SCROLL_DISTANCE = 110;
 const EXPANDED_HEIGHT = 180;
@@ -12,20 +13,26 @@ const COLLAPSED_HEIGHT = 64;
 
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
-/** 0~1 로 정규화된 스크롤 진행도. 원본의 interpolate(scrollY, [0, 110]) 과 같은 역할 */
+/**
+ * 0~1 로 정규화된 스크롤 진행도. 원본의 interpolate(scrollY, [0, 110]) 과 같은 역할.
+ * 앱이 폰 프레임 안에서 스크롤되므로 window 가 아니라 스크롤 영역을 본다.
+ */
 function useScrollProgress() {
+  const scrollEl = useScrollArea();
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    const target: HTMLElement | Window = scrollEl ?? window;
+
     const onScroll = () => {
-      const next = Math.min(Math.max(window.scrollY / SCROLL_DISTANCE, 0), 1);
-      setProgress(next);
+      const y = scrollEl ? scrollEl.scrollTop : window.scrollY;
+      setProgress(Math.min(Math.max(y / SCROLL_DISTANCE, 0), 1));
     };
 
     onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+    target.addEventListener('scroll', onScroll, { passive: true });
+    return () => target.removeEventListener('scroll', onScroll);
+  }, [scrollEl]);
 
   return progress;
 }
@@ -33,23 +40,23 @@ function useScrollProgress() {
 /**
  * 원본 app/(app)/(tabs)/home.tsx 의 스크롤 연동 헤더.
  * 오렌지(#ff5900) → 흰색으로 바뀌며 180px → 64px 로 접힌다.
+ * 원본처럼 상단 세이프에어리어(--safe-top)만큼 더 높고, 그만큼 안쪽을 띄운다.
  */
 export default function HomeHeader({ username = '이상현' }: { username?: string }) {
   const p = useScrollProgress();
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [isNotiOpen, setNotiOpen] = useState(false);
 
-  const height = lerp(EXPANDED_HEIGHT, COLLAPSED_HEIGHT, p);
   const radius = lerp(24, 0, p);
   const iconColor = p > 0.5 ? '#1F2937' : '#FFFFFF';
 
   return (
     <>
       <div
-        className="sticky top-0 z-30 overflow-hidden px-5"
+        className="sticky top-0 z-30 overflow-hidden px-5 pt-[var(--safe-top)]"
         style={{
-          height,
-          backgroundColor: `rgb(${lerp(255, 255, p)}, ${lerp(89, 255, p)}, ${lerp(0, 255, p)})`,
+          height: `calc(var(--safe-top) + ${lerp(EXPANDED_HEIGHT, COLLAPSED_HEIGHT, p)}px)`,
+          backgroundColor: `rgb(255, ${lerp(89, 255, p)}, ${lerp(0, 255, p)})`,
           borderBottomLeftRadius: radius,
           borderBottomRightRadius: radius,
           boxShadow: p >= 1 ? '0 1px 3px rgba(26,28,32,0.05)' : 'none',
@@ -94,7 +101,6 @@ export default function HomeHeader({ username = '이상현' }: { username?: stri
               type="button"
               onClick={() => setDrawerOpen(true)}
               aria-label="메뉴 열기"
-              className="lg:hidden"
             >
               <Menu size={24} color={iconColor} />
             </button>

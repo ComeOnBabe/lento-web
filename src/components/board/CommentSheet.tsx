@@ -18,8 +18,7 @@ export default function CommentSheet({ isOpen, onClose }: Props) {
 
   return (
     <div
-      /* lg:left-[240px] — 좌측 레일을 뺀 콘텐츠 영역 기준으로 가운데 정렬되도록 */
-      className="fixed inset-0 z-[120] lg:left-[240px]"
+      className="fixed inset-0 z-[120]"
       style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
       aria-hidden={!isOpen}
     >
@@ -32,7 +31,7 @@ export default function CommentSheet({ isOpen, onClose }: Props) {
       />
 
       <div
-        className="absolute inset-x-0 bottom-0 mx-auto flex h-[70%] max-w-[560px] flex-col rounded-t-3xl bg-white shadow-lg transition-transform duration-300 ease-out"
+        className="absolute inset-x-0 bottom-0 flex h-[70%] flex-col rounded-t-3xl bg-white shadow-lg transition-transform duration-300 ease-out"
         style={{ transform: `translateY(${isOpen ? 0 : 100}%)` }}
       >
         <div className="flex flex-col items-center border-b border-gray-100 py-3">

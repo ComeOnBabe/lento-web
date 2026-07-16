@@ -4,8 +4,7 @@ import Image from 'next/image';
 /** 원본 features/ailine/components/AilineEmptyView.tsx (분석 이력이 없을 때) */
 export default function AilineEmptyView() {
   return (
-    /* 한 화면에 담기는 안내 화면이라 데스크톱에서도 폭을 모바일 수준으로 묶어둔다 */
-    <div className="mx-auto flex min-h-[calc(100vh-56px)] max-w-[560px] flex-col justify-between bg-white px-5 pb-6 pt-8">
+    <div className="pb-tabbar flex flex-1 flex-col justify-between bg-white px-5 pt-8">
       <div>
         <h2 className="text-head2-b mb-10 whitespace-pre-line text-gray-900">
           {'임신 테스트기를 촬영하고\nAI 라인 결과 분석을 받아보세요'}

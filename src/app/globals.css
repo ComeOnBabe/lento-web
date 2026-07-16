@@ -15,7 +15,8 @@
 
   body {
     /* 원본 앱은 라이트 테마 전용이라 다크 모드 대응은 두지 않는다. */
-    @apply bg-gray-200 text-gray-900 antialiased;
+    /* 스크롤은 폰 프레임 안에서만 일어나므로 body 는 스크롤하지 않는다. */
+    @apply overflow-hidden bg-gray-200 text-gray-900 antialiased;
     font-family:
       var(--font-pretendard), Pretendard, -apple-system, BlinkMacSystemFont,
       system-ui, sans-serif;
@@ -24,6 +25,18 @@
 }
 
 @layer utilities {
+  /* 하단 탭바(64px + 세이프에어리어)에 콘텐츠가 가리지 않도록 */
+  .pb-tabbar {
+    padding-bottom: calc(84px + env(safe-area-inset-bottom));
+  }
+
+  @media (min-width: 1024px) {
+    .pb-tabbar {
+      /* 데스크톱 목업은 탭바에 홈 인디케이터 여백(pb-6)이 더 붙는다 */
+      padding-bottom: 108px;
+    }
+  }
+
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }

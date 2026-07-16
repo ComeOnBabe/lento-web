@@ -42,8 +42,7 @@ export default function CalendarEventModal({
       role="dialog"
       aria-modal="true"
       aria-label={formatDate(dateString)}
-      /* lg:left-[240px] — 좌측 레일을 뺀 콘텐츠 영역 기준으로 가운데 정렬되도록 */
-      className="fixed inset-0 z-[150] flex animate-[fade-in_200ms_ease-out] items-center justify-center lg:left-[240px]"
+      className="fixed inset-0 z-[150] flex animate-[fade-in_200ms_ease-out] items-center justify-center"
     >
       <button
         type="button"

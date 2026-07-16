@@ -22,7 +22,7 @@ export default function NotificationPanel({ isVisible, onClose }: Props) {
 
   return (
     <div
-      className="fixed inset-0 z-[200] bg-white transition-transform duration-150 ease-out lg:left-[240px]"
+      className="fixed inset-0 z-[200] bg-white pt-[var(--safe-top)] transition-transform duration-150 ease-out"
       style={{
         transform: `translateX(${isVisible ? 0 : 100}%)`,
         pointerEvents: isVisible ? 'auto' : 'none',

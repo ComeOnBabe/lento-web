@@ -28,8 +28,7 @@ export default function AnalysisMethodSheet({ isOpen, onClose }: Props) {
 
   return (
     <div
-      /* lg:left-[240px] — 좌측 레일을 뺀 콘텐츠 영역 기준으로 가운데 정렬되도록 */
-      className="fixed inset-0 z-[120] lg:left-[240px]"
+      className="fixed inset-0 z-[120]"
       style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
       aria-hidden={!isOpen}
     >
@@ -43,7 +42,7 @@ export default function AnalysisMethodSheet({ isOpen, onClose }: Props) {
       />
 
       <div
-        className="absolute inset-x-0 bottom-0 mx-auto max-w-[560px] rounded-t-3xl bg-white px-5 pb-6 pt-4 transition-transform duration-300 ease-out"
+        className="absolute inset-x-0 bottom-0 rounded-t-3xl bg-white px-5 pb-6 pt-4 transition-transform duration-300 ease-out"
         style={{ transform: `translateY(${isOpen ? 0 : 100}%)` }}
       >
         <div className="mx-auto mb-4 h-1 w-10 rounded-full bg-gray-400" />

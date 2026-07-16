@@ -10,19 +10,13 @@ export default function HomePage() {
     <>
       <HomeHeader />
 
-      {/*
-        원본은 카드를 세로로 쭉 쌓지만, 웹은 가로 여백이 남으므로
-        lg 이상에서 2열로 배치한다. 모바일은 원본과 동일한 단일 열.
-      */}
-      <div className="px-5 pt-5">
+      {/* 원본과 동일하게 카드를 한 줄로 쌓는다 */}
+      <div className="pb-tabbar flex flex-col gap-5 px-5 pt-5">
         <QuickActionCard />
-
-        <div className="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:items-start">
-          <MyHealthCard />
-          <HealthFeedbackCard />
-          <UserCalendar />
-          <UpcomingSchedule />
-        </div>
+        <MyHealthCard />
+        <HealthFeedbackCard />
+        <UserCalendar />
+        <UpcomingSchedule />
       </div>
     </>
   );

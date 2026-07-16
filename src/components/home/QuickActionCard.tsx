@@ -9,7 +9,7 @@ const ACTIONS = [
 /** 원본 features/home/components/QuickActionCard.tsx */
 export default function QuickActionCard() {
   return (
-    <div className="mb-4 flex rounded-3xl border border-gray-100 bg-gray-0 px-2 py-5 shadow-card">
+    <div className="flex rounded-3xl border border-gray-100 bg-gray-0 px-2 py-5 shadow-card">
       {ACTIONS.map(({ label, Icon }) => (
         <button
           key={label}

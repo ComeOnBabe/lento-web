@@ -19,7 +19,7 @@ export default function AilineHistoryView() {
   const items = filter ? MOCK_HISTORY.filter((i) => i.prob >= 50) : MOCK_HISTORY;
 
   return (
-    <div className="min-h-screen bg-gray-200 px-5 pt-6">
+    <div className="pb-tabbar flex-1 bg-gray-200 px-5 pt-6">
       {/* 1. 상단 안내 배너 */}
       <div className="mb-8 flex items-center justify-between rounded-lg bg-gray-0 p-5">
         <div>
@@ -61,7 +61,8 @@ export default function AilineHistoryView() {
           <span className="text-body2-r text-gray-900">50% 이상만</span>
         </div>
 
-        <div className="grid grid-cols-2 gap-x-4 gap-y-6 lg:grid-cols-4">
+        {/* 원본과 동일하게 2열 */}
+        <div className="grid grid-cols-2 gap-x-4 gap-y-6">
           {items.map((item) => (
             <AilineHistoryItem key={item.id} item={item} />
           ))}

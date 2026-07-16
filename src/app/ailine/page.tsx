@@ -12,7 +12,7 @@ export default function AilinePage() {
   const [hasHistory, setHasHistory] = useState(true);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="flex min-h-full flex-col bg-white">
       <PageHeader
         title="AI 라인"
         action={
